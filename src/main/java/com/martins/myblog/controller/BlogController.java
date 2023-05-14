@@ -4,9 +4,7 @@ import com.martins.myblog.data.dto.request.CreateBlogRequest;
 import com.martins.myblog.data.dto.response.Response;
 import com.martins.myblog.data.model.Blog;
 import com.martins.myblog.service.BlogService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
