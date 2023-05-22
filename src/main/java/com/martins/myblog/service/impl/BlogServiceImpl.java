@@ -5,11 +5,13 @@ import com.martins.myblog.data.dto.response.Response;
 import com.martins.myblog.data.model.Blog;
 import com.martins.myblog.data.repository.BlogRepository;
 import com.martins.myblog.service.BlogService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class BlogServiceImpl implements BlogService {
     private final BlogRepository repository;
 
@@ -35,11 +37,15 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public List<Blog> getAllBlog() {
-        return repository.findAll();
+        List<Blog> fetchAll = repository.findAll();
+        log.info("fetchAll: " + fetchAll);
+        return fetchAll;
     }
 
     @Override
     public Blog getBlog(String blogId) {
-        return repository.findBlogById(blogId);
+        Blog fetch = repository.findBlogsById(blogId);
+        log.info("Fetched blog {}", fetch);
+        return fetch;
     }
 }

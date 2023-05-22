@@ -32,8 +32,8 @@ public class BlogController {
         return service.getAllBlog();
     }
 
-    @GetMapping(value = "/{blogId}")
-    public Blog getById(@PathVariable String blogId){
+    @PutMapping(value = "/blog/{blogId}")
+    public Blog getById(@PathVariable("blogId") String blogId){
         return service.getBlog(blogId);
     }
 }

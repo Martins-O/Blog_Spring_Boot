@@ -5,4 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface BlogRepository extends MongoRepository<Blog, String> {
     Blog findBlogById(String blogId);
+    Blog findBlogsById(String blogId);
+    Blog findBlogsByAuthor(String author);
 }
