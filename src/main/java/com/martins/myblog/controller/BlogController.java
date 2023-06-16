@@ -5,6 +5,7 @@ import com.martins.myblog.data.dto.response.Response;
 import com.martins.myblog.data.model.Blog;
 import com.martins.myblog.service.BlogService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,13 +18,13 @@ public class BlogController {
 
     private final BlogService service;
 
-    @PostMapping("/")
-    public Response create(@RequestBody CreateBlogRequest request){
-        return service.createBlog(request);
+    @PostMapping()
+    public ResponseEntity<Response> create(@RequestBody CreateBlogRequest request){
+        return ResponseEntity.ok(service.createBlog(request));
     }
 
     @DeleteMapping("/delete/{blogId}")
-    public void deleteById(@PathVariable String blogId){
+    public void deleteById(@PathVariable Long blogId){
         service.deleteBlog(blogId);
     }
 
@@ -32,8 +33,8 @@ public class BlogController {
         return service.getAllBlog();
     }
 
-    @PutMapping(value = "/blog/{blogId}")
-    public Blog getById(@PathVariable("blogId") String blogId){
+    @GetMapping(value = "/blog/{blogId}")
+    public Blog getById(@PathVariable("blogId") Long blogId){
         return service.getBlog(blogId);
     }
 }

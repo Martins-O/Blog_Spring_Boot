@@ -21,6 +21,10 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Response createBlog(CreateBlogRequest request) {
+        var findTitles = repository.existsBlogByTitle(request.getTitle());
+        if (findTitles){
+            throw new IllegalStateException("Blog already exists");
+        }
         Blog blog = Blog.builder()
                 .author(request.getAuthor())
                 .content(request.getContent())
@@ -31,7 +35,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void deleteBlog(String blogId) {
+    public void deleteBlog(Long blogId) {
         repository.deleteById(blogId);
     }
 
@@ -43,9 +47,14 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Blog getBlog(String blogId) {
+    public Blog getBlog(Long blogId) {
         Blog fetch = repository.findBlogsById(blogId);
         log.info("Fetched blog {}", fetch);
         return fetch;
+    }
+
+    @Override
+    public Blog getBlogByAuthor(String author) {
+       return repository.findBlogsByAuthor(author);
     }
 }
